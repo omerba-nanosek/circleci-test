@@ -31,7 +31,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           context: omer-context
-          aws-region: AWS_REGION
+          aws-region: ${AWS_REGION}
           family: 'omer'
           service-name: 'Service'
           cluster-name: 'Cluster'
