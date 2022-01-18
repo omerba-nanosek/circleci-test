@@ -33,8 +33,8 @@ workflows:
           context: omer-context
           aws-region: ${AWS_REGION}
           family: 'omer'
-          service-name: 'Service'
-          cluster-name: 'Cluster'
+          service-name: 'nginx-service'
+          cluster-name: 'omer-cluster'
           verify-revision-is-deployed: true
           filters:
             branches:
