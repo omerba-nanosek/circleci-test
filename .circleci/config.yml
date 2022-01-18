@@ -1,0 +1,44 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+  aws-ecs: circleci/aws-ecs@1.3.0
+
+executors:
+  default_exec:
+    machine:
+      docker_layer_caching: true
+
+jobs:
+  docker-build:
+    executor: default_exec 
+    steps:
+      - checkout
+      - run: docker build -t omer-test .
+
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          executor: default_exec
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          repo: omer-repo
+          tag: latest
+          context: omer-context
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          context: omer-context
+          aws-region: AWS_REGION
+          family: 
+          service-name: 
+          cluster-name:
+          container-image-name-update:
+          verify-revision-is-deployed: true
+          filters:
+            branches:
+              only:
+                - master
+          
