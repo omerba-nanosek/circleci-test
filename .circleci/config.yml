@@ -32,7 +32,7 @@ workflows:
             - aws-ecr/build-and-push-image
           context: omer-context
           aws-region: ${AWS_REGION}
-          family: 'omer'
+          family: 'first-run-task-definition'
           service-name: 'nginx-service'
           cluster-name: 'omer-cluster'
           verify-revision-is-deployed: true
