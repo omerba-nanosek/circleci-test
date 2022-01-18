@@ -32,10 +32,9 @@ workflows:
             - aws-ecr/build-and-push-image
           context: omer-context
           aws-region: AWS_REGION
-          family: 
-          service-name: 
-          cluster-name:
-          container-image-name-update:
+          family: 'omer'
+          service-name: 'Service'
+          cluster-name: 'Cluster'
           verify-revision-is-deployed: true
           filters:
             branches:
